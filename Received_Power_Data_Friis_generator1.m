@@ -2,9 +2,11 @@ clear;clc;
 
 antenna_type = dipole;
 
-iterations = 1000;
+iterations = 500;
  
 frequency = 70e6;
+
+PtdBm = 10; % Tx power given in dBm
 
 folder = '/DOA_Data/antennas/';
 mkdir([pwd folder]); % Create folder
@@ -18,14 +20,14 @@ p_matrix = zeros(iterations, 1);
 %     p_matrix(i) = (max_dist-min_dist)*rand() + min_dist;
 % end
 for i = 1:iterations
-    p_matrix(i) = randi(90) + 10;
+    p_matrix(i) = randi(90)+10;
 end
 
-for antennasNumber = 2:5 % Generate data for a two to 16 antenna system
+for antennasNumber = 2:16 % Generate data for a two to 16 antenna system
      mkdir([pwd folder int2str(antennasNumber) '/']);
      name = strcat(pwd, folder, int2str(antennasNumber), '/iter_');
      N = antennasNumber;
-     Received_Power_Data_Friis1(N, frequency, iterations, name, antenna_type, p_matrix);
+     Received_Power_Data_Friis1(N, frequency, iterations, name, antenna_type, p_matrix, PtdBm);
 end
 
 %N = 4;

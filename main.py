@@ -93,10 +93,12 @@ if __name__ == '__main__':
 	phase = 5
 
 	
-	#modelList = [DecisionTreeClassifier(max_depth=900, max_features='auto', random_state=42)]
 	modelList = [DecisionTreeClassifier(random_state=42)]
 	modelName = ['DT']
+	
 	'''
+	modelList = [DecisionTreeClassifier(max_depth=900, max_features='auto', random_state=42)]
+	modelName = ['DT']
 
 	modelList = [RandomForestClassifier(n_estimators=10)]
 	modelName = ['RF']
@@ -112,7 +114,7 @@ if __name__ == '__main__':
 			#create a folder Logs_Folder + str(i)
 			objectLogs.createFolder(Logs_Folder + 'first_proposal/' + str(i))
 			objectLogs.createFolder(Logs_Folder + 'second_proposal/' + str(i))
-			#objectLogs.createFolder(Logs_Folder + 'third_proposal/' + str(i))
+			objectLogs.createFolder(Logs_Folder + 'third_proposal/' + str(i))
 			
 
 			#clean the file: modelName[name] + '.csv'
@@ -129,10 +131,10 @@ if __name__ == '__main__':
 				print('Getting data...')
 				antenna_data, label_list, label_matrix = handleData.get_synthatic_data() #label_list: for the second proposal, label_matrix: for the first and third proposal 
 				
-				# first_proposal_response = first_proposal()
+				first_proposal_response = first_proposal()
 				
 				#if (modelName[name] != 'Bagging Classifier'):
 					#second_proposal_response = second_proposal()
 				
-				third_proposal_response = third_proposal()
+				#third_proposal_response = third_proposal()
 						

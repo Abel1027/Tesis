@@ -100,20 +100,19 @@ if __name__ == '__main__':
 	{'max_depth': [x for x in range(1,25)]}],[{'n_estimators': [x for x in range(100,1100,100)], 'max_samples': np.linspace(0.1, 1.0, 5)}],[{'kernel': ['rbf','poly','sigmoid'], 'gamma': np.logspace(-6, 10, 5), 'C': [1, 10, 100, 1000,10000]},
 						{'kernel': ['linear'], 'C': [1, 10, 100, 1000,10000]}]]
 	
-	'''
 	
-	'''
-	modelList = [RandomForestClassifier()]
+	
+
+	modelList = [RandomForestClassifier(DecisionTreeClassifier())]
 	modelName = ['RF']
-	param_grid_list = [{'estimator__max_depth': [x for x in range(10,110,10)]}] #for third proposal
-	#param_grid_list = [{'n_estimators': [x for x in range(10,60,10)]}]
+	#param_grid_list = [{'estimator__max_depth': [x for x in range(10,110,10)]}]
+	param_grid_list = [{'n_estimators': [x for x in range(10,60,10)]}]
 	'''
 
 	modelList = [DecisionTreeClassifier(random_state=42)]
 	modelName = ['DT']
-	param_grid_list = [{'max_depth': [x for x in range(100,1100,100)]}]
-	#param_grid_list = [{'estimator__max_depth': [x for x in range(100,1600,100)]}]
-	
+	#param_grid_list = [{'max_depth': [x for x in range(100,1100,100)]}]
+	param_grid_list = [{'estimator__max_depth': [x for x in range(100,1100,100)]}]
 
 	
 	for name,model in enumerate(modelList):
@@ -129,9 +128,9 @@ if __name__ == '__main__':
 			#objectLogs.createFolder(Logs_Folder + 'third_proposal/' + str(i))
 
 			#clean the file: modelName[name] + '.csv'
-			open(Logs_Folder + 'first_proposal/' + str(i) + '/' + modelName[name] + '.csv', 'w').close()
+			#open(Logs_Folder + 'first_proposal/' + str(i) + '/' + modelName[name] + '.csv', 'w').close()
 			#(Logs_Folder + 'second_proposal/' + str(i) + '/' + modelName[name] + '.csv', 'w').close()
-			#open(Logs_Folder + 'third_proposal/' + str(i) + '/' + modelName[name] + '.csv', 'w').close()
+			open(Logs_Folder + 'third_proposal/' + str(i) + '/' + modelName[name] + '.csv', 'w').close()
 			
 
 			for j in sortedDirFiles:
@@ -143,9 +142,9 @@ if __name__ == '__main__':
 				print('Getting data...')
 				antenna_data, label_list, label_matrix = handleData.get_synthatic_data()
 				
-				first_proposal_response = first_proposal()
+				#first_proposal_response = first_proposal()
 				
 				#if (modelName[name] != 'Bagging Classifier'):
 					#second_proposal_response = second_proposal()
 				
-				#third_proposal_response = third_proposal()
+				third_proposal_response = third_proposal()

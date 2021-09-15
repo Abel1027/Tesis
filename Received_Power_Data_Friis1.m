@@ -1,18 +1,22 @@
 function [] = Received_Power_Data_Friis1(N, frequency, iterations, name, antenna_type, p_matrix)
     lambda = 3e8/frequency; % 3e8 is the light speed
     r = lambda/2; % Radius of the circular antenna_type array
-    minimumPowerDB = -100; % Minimum transmission power in dBm
-    maximumPowerDB = -50; % Maximum transmission power in dBm
-    minimumPower = 10^((minimumPowerDB-30)/10); % Minimum transmission power in Watts
-    maximumPower = 10^((maximumPowerDB-30)/10); % Maximum transmission power in Watts
-    Pt = (maximumPower + minimumPower)/2; % Middle transmission power in Watts
+%     minimumPowerDB = -100; % Minimum transmission power in dBm
+%     maximumPowerDB = -50; % Maximum transmission power in dBm
+%     minimumPower = 10^((minimumPowerDB-30)/10); % Minimum transmission power in Watts
+%     maximumPower = 10^((maximumPowerDB-30)/10); % Maximum transmission power in Watts
+%     Pt = (maximumPower + minimumPower)/2; % Middle transmission power in Watts
+
+    PtdBm = 10; % Tx power given in dBm
+    Pt = 10^((PtdBm-30)/10); % transmission power in Watts
     
     Gt = 1; % Transmitter gain (unity gain)
     L = 1; % System losses (lossless)
 
     %Gn = db2mag(patternAzimuth(antenna_type,frequency,(0:1:180))) % Directivity along the azimuth
     %patternAzimuth(antenna_type,frequency,(0:1:180))
-    Gn = patternAzimuth(antenna_type,frequency,(0:1:180)); % Directivity along the azimuth
+    GndB = patternAzimuth(antenna_type,frequency,(0:1:180)); % Directivity along the azimuth
+    Gn = 10.^(GndB/10);
     Gn(:,end) = []; % Remove last column because the array has 361 elements (azimuth angles) instead of 360 (angles 0 and 360 are treated as different angles)
     Gn(end,:) = []; % Remove last row because the array has 181 elements (elevation angles) instead of 180 (angles 0 and 180 are treated as different angles)
     
